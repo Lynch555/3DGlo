@@ -1,5 +1,4 @@
-const one = require('./modules/one')
-const two = require('./modules/two')
+import timer from './modules/timer'
 
-one()
-two()
+
+timer('22 october 2022')
