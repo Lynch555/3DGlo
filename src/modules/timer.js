@@ -17,15 +17,32 @@ const timer = (deadline) => {
     const updateClock = () => {
         let getTime = getTimeRemaining()
 
-        timerHours.textContent = getTime.hours
-        timerMinutes.textContent = getTime.minutes
-        timerSeconds.textContent = getTime.seconds
+        if (getTime.hours < 10) {
+            timerHours.textContent = '0' + getTime.hours
+        } else {
+            timerHours.textContent = getTime.hours
+        }
 
-        if (getTime.timeRemaining > 0) {
-            setTimeout(updateClock, 1000)
+        if (getTime.minutes < 10) {
+            timerMinutes.textContent = '0' + getTime.minutes
+        } else {
+            timerMinutes.textContent = getTime.minutes
+        }
+
+        if (getTime.seconds < 10) {
+            timerSeconds.textContent = '0' + getTime.seconds
+        } else {
+            timerSeconds.textContent = getTime.seconds
+        }
+
+        if (getTime.timeRemaining < 0) {
+            clearInterval(idInterval)
+            timerHours.textContent = '00'
+            timerMinutes.textContent = '00'
+            timerSeconds.textContent = '00'
         }
     }
-    updateClock()
+    let idInterval = setInterval(updateClock, 1000)
 }
 
 export default timer
