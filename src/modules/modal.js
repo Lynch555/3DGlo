@@ -1,41 +1,41 @@
 const modal = () => {
-    const modal = document.querySelector('.popup')
-    const buttons = document.querySelectorAll('.popup-btn')
-    const closeBtn = document.querySelector('.popup-close')
-    const modalContent = modal.querySelector('.popup-content')
+    const modal = document.querySelector('.popup');
+    const buttons = document.querySelectorAll('.popup-btn');
+    const closeBtn = document.querySelector('.popup-close');
+    const modalContent = modal.querySelector('.popup-content');
 
-    let count = -100
-    let animationId
+    let count = -100;
+    let animationId;
 
     const modalAnimate = () => {
-        count += 2
-        animationId = requestAnimationFrame(modalAnimate)
-        modal.style.display = 'block'
+        count += 2;
+        animationId = requestAnimationFrame(modalAnimate);
+        modal.style.display = 'block';
 
         if (count <= 10) {
-            modalContent.style.top = count + '%'
+            modalContent.style.top = count + '%';
         } else {
-            cancelAnimationFrame(animationId)
+            cancelAnimationFrame(animationId);
         }
-    }
+    };
 
       buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             if (screen.width < 768) {
-                modalContent.style.top = 10 + '%'
-                modal.style.display = 'block'
+                modalContent.style.top = 10 + '%';
+                modal.style.display = 'block';
             } else {
-                modalAnimate()
+                modalAnimate();
             }
-        })
+        });
     });
 
     closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none'
-        count = -100
-        modalContent.style.top = -100 + '%'
-    })
+        modal.style.display = 'none';
+        count = -100;
+        modalContent.style.top = -100 + '%';
+    });
 
-}
+};
 
-export default modal
+export default modal;
