@@ -4,41 +4,57 @@ const calc = (price = 100) => {
     const calcSquare = document.querySelector('.calc-square');
     const calcCount = document.querySelector('.calc-count');
     const calcDay = document.querySelector('.calc-day');
-    const total = document.getElementById('total');
+    const totalValue = document.getElementById('total');
 
-    const countCalc = () => {
-        const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
-        const calcSquareValue = calcSquare.value;
+    const countSum = () => {
+		let total = 0,
+			countValue = 1,
+			dayValue = 10,
+			step = 100;
+		const typeValue = calcType.options[calcType.selectedIndex].value,
+			squareValue = +calcSquare.value;
 
-        let totalValue = 0;
-        let calcCountValue = 1;
-        let calcDeyValue = 1;
+		if (calcCount.value > 1) {
+			countValue += (calcCount.value - 1) / 10;
+		}
 
-        if (calcCount.value > 1) {
-            calcCountValue += +calcCount.value / 10;
-        }
+		if (calcDay.value) {
+			if (calcDay.value < 5) {
+				dayValue *= 2;
+			} else if (calcDay.value < 10) {
+				dayValue *= 1.5;
+			}
+		}
 
-        if (calcDay.value && calcDay.value < 5) {
-            calcDeyValue = 2;
-        } else if (calcDay.value && calcDay.value < 10) {
-            calcDeyValue = 1.5;
-        }
+		if (!!typeValue && !!squareValue) {
+			total = price * typeValue * squareValue * countValue * dayValue;
+		}
 
-        if (calcType.value && calcSquare.value) {
-            totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDeyValue;
-        } else {
-            totalValue = 0;
-        }
+		if (+totalValue.textContent !== total) {
+			if (totalValue.textContent > total) {
+				step = -1;
+			}
 
-        total.textContent = totalValue;
-    };
+			const timer = setInterval(() => {
+				totalValue.textContent = +totalValue.textContent + step;
 
-    calcBlock.addEventListener('input', (e) => {
-        if (e.target === calcType || e.target === calcSquare ||
-            e.target === calcCount || e.target === calcDay) {
-            countCalc();
-        }
-    });
+				if ((total - totalValue.textContent) * step < 1) {
+					clearInterval(timer);
+
+					totalValue.textContent = Math.round(total);
+				}
+			}, 0);
+		}
+	};
+
+	calcBlock.addEventListener('input', event => {
+		const target = event.target;
+
+		if (target.matches('.calc-day') || target.matches('.calc-type') ||
+			target.matches('.calc-square') || target.matches('.calc-count')) {
+			countSum();
+		}
+	});
 };
 
 export default calc;
