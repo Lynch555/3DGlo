@@ -15,7 +15,7 @@ const calc = (price = 100) => {
         let calcDeyValue = 1;
 
         if (calcCount.value > 1) {
-            calcCountValue += +calcCountValue.value / 10;
+            calcCountValue += +calcCount.value / 10;
         }
 
         if (calcDay.value && calcDay.value < 5) {
