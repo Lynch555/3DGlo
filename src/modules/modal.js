@@ -1,4 +1,3 @@
-//import { AsyncDependenciesBlock } from 'webpack';
 import { animate } from './helpers';
 
 const modal = () => {
