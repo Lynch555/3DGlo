@@ -26,7 +26,7 @@ const modal = () => {
     if (
       !e.target.closest('.popup-content') ||
       e.target.classList.contains('popup-close')
-    ) {
+    ) { 
       modal.style.display = 'none';
     }
   });

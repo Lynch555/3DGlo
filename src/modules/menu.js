@@ -5,13 +5,14 @@ const menu = () => {
     const menuItems = menu.querySelectorAll('ul>li>a');
     const miniLink = document.querySelector('main>a');
 
-    const handleMenu = () => {
+    const handleMenu = (event) => {
+        event.preventDefault();
         menu.classList.toggle('active-menu');
     };
 
-    menuBtn.addEventListener('click', handleMenu);
+    menuBtn.addEventListener('click',  handleMenu);
     closeBtn.addEventListener('click', handleMenu);
-
+    
     // УСЛОЖНЕННОЕ ЗАДАНИЕ
 
     menuItems.forEach(menuItem => {
@@ -30,7 +31,7 @@ const menu = () => {
         });
     });
 
-    miniLink.addEventListener('click', (event) => {  
+    miniLink.addEventListener('click', (event) => {   
         const scrollTarget = document.getElementById('service-block');
         const elementPosition = scrollTarget.getBoundingClientRect().top;
         event.preventDefault();
@@ -38,8 +39,10 @@ const menu = () => {
         window.scrollBy({
             top: elementPosition,
             behavior: "smooth"
+
         });
     });
 };
+
 
 export default menu;
